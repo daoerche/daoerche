@@ -24,7 +24,7 @@
 
 
 ## What it is?
-Front-End Learing
+Front-End Learning
 
 ## Commit standard
 ```shell
