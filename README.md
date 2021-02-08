@@ -141,6 +141,7 @@ algorithm
         LCOF.js:  Leetcode: 剑指 Offer 27. 二叉树的镜像
         LCOF2.js:  Leetcode: 剑指 Offer 28. 对称的二叉树
         LCOF3.js:  Leetcode: 剑指 Offer 32 - II. 从上到下打印二叉树 II
+        LCOF4.js:  Leetcode: 剑指 Offer 54. 二叉搜索树的第k大节点
         N-aryTreePostorderTraversal.js:  Leetcode: 590. N叉树的后序遍历
         averageofLevelsinBinaryTree.js:  Leetcode: 637. 二叉树的层平均值
         balancedBinaryTree.js:  Leetcode: 110. 平衡二叉树
