@@ -39,6 +39,6 @@ export default {
 
     }
   },
-  inject: ['aaa']
+  // inject: ['aaa']
 }
 </script>
