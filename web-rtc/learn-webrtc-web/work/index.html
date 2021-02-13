@@ -13,16 +13,23 @@
 
 <h1>Realtime communication with WebRTC</h1>
 
-<textarea id="dataChannelSend" disabled
-          placeholder="Press Start, enter some text, then press Send."></textarea>
-<textarea id="dataChannelReceive" disabled></textarea>
-
-<div id="buttons">
-  <button id="startButton">Start</button>
-  <button id="sendButton">Send</button>
-  <button id="closeButton">Stop</button>
+<div id="videoCanvas">
+  <video id="camera" autoplay playsinline></video>
+  <canvas id="photo"></canvas>
 </div>
 
+<div id="buttons">
+  <button id="snap">Snap</button><span> then </span><button id="send">Send</button>
+  <span> or </span>
+  <button id="snapAndSend">Snap &amp; Send</button>
+</div>
+
+<div id="incoming">
+  <h2>Incoming photos</h2>
+  <div id="trail"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.1/socket.io.js" integrity="sha512-oFOCo2/3DtjrJG4N27BjSLQWoiBv171sK6a+JiWjp/7agxC2nCUP358AqzxkBUb5jX8g6CYLPdSKQTbC0weCwA==" crossorigin="anonymous"></script>
 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
 <script src="js/main.js"></script>
 
