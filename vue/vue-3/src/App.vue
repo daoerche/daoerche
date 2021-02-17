@@ -12,6 +12,7 @@ export default {
   components: {
     HelloWorld
   },
+  custom: 'hello!',
   errorCaptured(...rest) {
     console.log('app errorCaptured', rest);
   }

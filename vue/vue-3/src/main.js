@@ -13,4 +13,22 @@ app.config.globalProperties.$http = () => {
   console.log('globalProperties', '$http');
 }
 app.config.isCustomElement = tag => tag.startsWith('icon-');
+
+app.config.optionMergeStrategies.custom = (parent, child, vm) => {
+  console.log([
+    `parent: ${parent}`,
+    `child: ${child}`,
+  ].join('\n'));
+  // => "goodbye!", undefined
+  // => "hello", "goodbye!"
+  return parent || child;
+}
+
+app.mixin({
+  custom: 'goodbye!',
+  created() {
+    console.log('daoer', this.$options.custom) // => "hello!"
+  }
+});
+
 app.mount('#app')
