@@ -57,7 +57,8 @@ dirTitleHandle(rootPath);
 ```
 
 
-<pre>Css
+<pre>BuildReadMe: daoerche项目ReadMe自动构建工具
+Css
     Flex: flex布局学习
 Library
     javaScript
@@ -200,7 +201,6 @@ algorithm
     utils
         linkList.js:  构造链表的工具函数
         tree.js:  构造树的工具函数
-buildReadMe: daoerche项目ReadMe自动构建工具
 performance
     mini-performance: 写一个性能监控的库
 typescript
