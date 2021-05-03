@@ -130,6 +130,7 @@ algorithm
         bubbleSort.js:  冒泡排序
     Stack
         MinStack.js:  LeetCode 155. 最小栈
+        validParentheses.js:  LeetCode 20. 有效的括号
     String
         commonChars.js:  leetCode 1002. 查找常用字符
         firstUniqueCharacterinaString.js:  Leetcode: 387. 字符串中的第一个唯一字符

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leetcode 20. 有效的括号小游戏</title>
+    <style>
+        button {
+            padding: 5px 20px;
+            font-size: 20px;
+        }
+
+        #addBracketText {
+            height: 50px;
+            width: 100%;
+            font-size: 50px;
+            letter-spacing: 25px;
+            text-align: center;
+        }
+
+        div.container {
+            width: 1024px;
+            height: 600px;
+            margin: 10px auto;
+            outline: 1px solid #666666;
+            position: relative;
+        }
+
+        div.container div.bracket {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            left: 512px;
+            margin-left: -25px;
+            outline: 1px solid coral;
+            writing-mode: tb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        div.container div.bracket1 {
+            background-color: #f9c3c3;
+        }
+
+        div.container div.bracket2 {
+            background-color: #f8f9a5;
+        }
+
+        div.container div.bracket3 {
+            background-color: #c1e3ff;
+        }
+    </style>
+</head>
+<body>
+<div style="text-align: center; width: 100%; margin-bottom: 10px">
+    <button id="startGame">start game</button>
+    <button id="addBracket">add bracket</button>
+</div>
+<div style="text-align: center; width: 1024px; margin: auto">
+    <input type="text" id="addBracketText" />
+</div>
+<div id="container" class="container">
+</div>
+<script>
+    const SPEED = 50;
+    const DEFAULT_BOTTOM = 600 - 50;
+    const addOperationQueue = [];
+    const bracketMap = {
+        '(': ')',
+        ')': '(',
+        '[': ']',
+        ']': '[',
+        '{': '}',
+        '}': '{'
+    }
+    const map = {
+        '(': ')',
+        '[': ']',
+        '{': '}'
+    }
+
+
+    const main = function () {
+        const startGameBtn = document.getElementById('startGame');
+        const addBracketBtn = document.getElementById('addBracket');
+
+        startGameBtn.onclick = startGame;
+        addBracketBtn.onclick = addBracketOperate;
+    }
+
+    const startGame = function (e) {
+        const inputBracketArray = String(document.getElementById('addBracketText').value).trim().split('');
+        inputBracketArray.forEach(bracket => addOperationQueue.unshift(bracketMap[bracket]));
+
+        setInterval(refresh, 1000);
+    }
+
+    const addBracketOperate = function () {
+        const inputBracketArray = String(document.getElementById('addBracketText').value).trim().split('');
+        inputBracketArray.forEach(bracket => addOperationQueue.unshift(bracketMap[bracket]));
+    }
+
+    const getContainerDom = function () {
+        return document.getElementById('container');
+    }
+
+    const getCurContainerElCounts = function () {
+        const container = getContainerDom();
+        return container.childElementCount;
+    }
+
+    const createBracket = function (text) {
+        const bracketDom = document.createElement('DIV');
+        bracketDom.innerHTML = `<span>${text}</span>`;
+
+        let className = 'bracket';
+        switch (text) {
+            case '(':
+            case ')':
+                className += ' bracket1';
+                break;
+            case '[':
+            case ']':
+                className += ' bracket2';
+                break;
+            case '{':
+            case '}':
+                className += ' bracket3';
+                break;
+        }
+
+        bracketDom.className = className;
+
+        return bracketDom;
+    }
+
+    const dropDom = function (dom) {
+        const oldBottom = Number.isNaN(parseInt(dom.style.bottom)) ? DEFAULT_BOTTOM : parseInt(dom.style.bottom);
+        dom.style.bottom = oldBottom - SPEED + 'px';
+    }
+
+    const shouldStopDrop = function (dom, idx) {
+        const curBottom = Number.isNaN(parseInt(dom.style.bottom)) ? DEFAULT_BOTTOM : parseInt(dom.style.bottom);
+        return curBottom <= idx * 50;
+    }
+
+    const traverseBrackets = function (cb) {
+        const container = getContainerDom();
+        const children = container.children;
+        const brackets = Array.from(children).reverse();
+
+        cb(brackets);
+    }
+
+    const moveBrackets = function (brackets) {
+        brackets.forEach((bracketDom, i) => !shouldStopDrop(bracketDom, i) && dropDom(bracketDom));
+    }
+
+    const removeBracket = function (brackets) {
+        const container = getContainerDom();
+
+        for (let i = 0; i < brackets.length; i++) {
+            const curBracketDom = brackets[i];
+            const preIdx = i - 1;
+
+            if (shouldStopDrop(curBracketDom, i) && (preIdx >= 0)) {
+                const preBracketDom = brackets[preIdx];
+
+                if (map[curBracketDom.innerText.trim()] === preBracketDom.innerText.trim()) {
+                    container.removeChild(curBracketDom);
+                    container.removeChild(preBracketDom);
+                }
+            }
+        }
+    }
+
+    const addBracket = function () {
+        if (!addOperationQueue.length) return;
+
+        const bracketText = addOperationQueue.pop();
+        const bracketDom = createBracket(bracketText);
+
+        const container = getContainerDom();
+        if (container.firstChild) {
+            container.insertBefore(bracketDom, container.firstChild);
+            return;
+        }
+
+        container.appendChild(bracketDom);
+    }
+
+    const refresh = function () {
+        traverseBrackets(moveBrackets);
+        traverseBrackets(removeBracket);
+        addBracket();
+    }
+
+    window.addEventListener('load', main, false);
+</script>
+</body>
+</html>
