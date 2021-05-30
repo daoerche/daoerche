@@ -92,6 +92,7 @@ algorithm
         climbStairs.js:  leetcode 70. 爬楼梯
         longestPalindromicSubstring.js:  Leetcode: 5. 最长回文子串
         maxProfit.js:  Leetcode 121. 买卖股票的最佳时机
+        maximumSubarray.js:  Leetcode 53. 最大子序和
         minCostClimbingStairs.js:  Leetcode: 746. 使用最小花费爬楼梯
     Greedy
         minimumNumberofArrowstoBurstBalloons.js:  Leetcode: 452. 用最少数量的箭引爆气球
